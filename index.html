@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Source Protection Area Landowner List Tool</title>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
+  integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw=="
+  crossorigin="anonymous"
+/>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <img src="assets/VT_MOM_Logo.png" alt="App Logo" class="topbar-logo">
+    <h1>Source Protection Area Landowner List Tool</h1>
+    <nav class="topbar-actions" aria-label="External links">
+      <a
+        class="topbar-link"
+        href="https://dec.vermont.gov/water/drinking-water/public-drinking-water-systems/source-water-protection"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Source Water Protection Webpage</a>
+      <a
+        class="topbar-link topbar-email"
+        href="mailto:ANR.DWGPDSourceProtection@vermont.gov"
+        title="Email ANR.DWGPDSourceProtection@vermont.gov"
+        aria-label="Email ANR.DWGPDSourceProtection@vermont.gov"
+      >&#9993;</a>
+    </nav>
+  </div>
+</header>
+
+<div class="shell">
+
+  <section class="search-panel" aria-label="Search by WSID">
+    <div class="search-row">
+      <div class="field">
+        <label for="wsidInput">Water System ID (WSID)</label>
+        <input
+          id="wsidInput"
+          type="text"
+          list="wsidOptions"
+          placeholder="Enter water system WSID"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <datalist id="wsidOptions"></datalist>
+      </div>
+      <button id="searchBtn" class="btn btn-primary" type="button">
+        Find parcels
+      </button>
+    </div>
+    <p class="field-hint">
+      Enter a WSID to view parcels that intersect with the corresponding Source Protection Area. <br>
+      This list can be used to distribute educational materials to landowners and can be included in a water system's Source Protection Plan.
+    </p>
+    <p id="statusLine" class="status-line" role="status"></p>
+    <div id="disambigPanel" class="disambig-panel" hidden>
+      <p class="disambig-label">Did you mean:</p>
+      <div id="disambigChips" class="disambig-chips"></div>
+    </div>
+  </section>
+
+  <section id="spaSummary" class="spa-summary" hidden>
+    <h2 class="section-title">Matched Source Protection Areas</h2>
+    <div id="spaChips" class="spa-chips"></div>
+  </section>
+
+  <div class="workspace">
+
+    <section class="map-panel">
+      <div class="map-legend">
+        <span class="legend-item"><span class="dot gw"></span> Ground Water SPA</span>
+        <span class="legend-item"><span class="dot sw"></span> Surface Water SPA</span>
+        <button id="mapFullscreenBtn" class="btn-fullscreen" type="button" title="Full screen" aria-pressed="false">⤢</button>
+      </div>
+      <div id="map"></div>
+    </section>
+
+    <section id="resultsPanel" class="results-panel">
+      <div class="results-header">
+        <h2 class="section-title">
+          Intersecting parcels
+          <span id="parcelCount" class="count-badge">0</span>
+        </h2>
+        <div class="export-buttons">
+          <span class="export-label">Export as</span>
+          <button class="btn btn-ghost" data-format="csv" type="button" disabled>CSV</button>
+          <button class="btn btn-ghost" data-format="xlsx" type="button" disabled>XLSX</button>
+          <button id="resultsFullscreenBtn" class="btn-fullscreen" type="button" title="Full screen" aria-pressed="false">⤢</button>
+        </div>
+      </div>
+
+      <div id="tableWrap" class="table-wrap" hidden>
+        <table id="parcelsTable">
+          <thead>
+            <tr>
+              <th>SPAN</th>
+              <th>Parcel ID</th>
+              <th>E911 Address</th>
+              <th>Town</th>
+              <th>Owner</th>
+              <th>Mailing Address</th>
+              <th>Property Type</th>
+              <th>Property Description</th>
+            </tr>
+          </thead>
+          <tbody id="parcelsBody"></tbody>
+        </table>
+      </div>
+
+      <div id="resultsEmpty" class="results-empty">
+        <p>No search yet. Enter a WSID above to view associated parcels.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="footer">
+    <p>
+      Parcel data are sourced from <a href="https://geodata.vermont.gov/pages/parcels" target="_blank" rel="noopener noreferrer">VCGI's Statewide Parcel Dataset</a>. Parcel data are general in nature and do not represent survey-grade boundary information. Substantial inaccuracies in boundary lines or Grand List attributes should be brought to the attention of the appropriate municipal clerk. 
+    </p>
+  </footer>
+
+</div>
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
+  integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g=="
+  crossorigin="anonymous"
+></script>
+<script src="vendor/t-arcgis.umd.js"></script>
+<script src="core.js?v=20260922"></script>
+<script src="app.js?v=20260922"></script>
+</body>
+</html>
