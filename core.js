@@ -377,7 +377,8 @@
           f: "json",
           objectIds: batch.join(","),
           outFields: PARCEL_QUERY_FIELDS.join(","),
-          returnGeometry: "false",
+          returnGeometry: "true",
+          outSR: 4326,
         },
       });
       parcels.push(...(data.features || []));
