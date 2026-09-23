@@ -35,7 +35,6 @@ The service URLs and export field list are defined in `core.js`.
 | `app.js` | User interface logic, map rendering, autocomplete, and exports |
 | `core.js` | WSID matching, SPA queries, parcel intersection logic, and CSV/XLSX builders |
 | `vendor/` | Third-party libraries used by the app |
-| `test/` | Automated tests for the core logic |
 | `assets/` | Images and static files |
 
 ## How it works
