@@ -126,7 +126,7 @@
         const layer = L.geoJSON(source.geometry, {
           pointToLayer: (_feature, latlng) => L.circleMarker(latlng, {
             radius: getWaterSourceRadius(facilityStatus, map.getZoom()),
-            color: "#000000 ",
+            color: "#000000",
             weight: 1,
             fillColor: sourceColor,
             fillOpacity: facilityStatus === "I" ? 0.6 : 0.95,
